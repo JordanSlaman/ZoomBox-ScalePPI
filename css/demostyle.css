@@ -1,0 +1,29 @@
+body {
+	background: #ddd;
+}
+
+#content {
+	background: #fff;
+	width:960px;
+	height: 800px;
+	margin: 40px auto;
+	border: 1px #ccc dashed;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+li {
+	display: inline;
+}
+
+li a {
+	text-decoration: none;
+}
+
+li img {
+	width: 200px;
+}
