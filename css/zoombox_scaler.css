@@ -50,7 +50,7 @@
 	-moz-opacity:0;
 	opacity:0;
 }
-#zoombox .zoombox_close,#zoombox .zoombox_next,#zoombox .zoombox_prev{
+#zoombox .zoombox_close,#zoombox .zoombox_scale,#zoombox .zoombox_next,#zoombox .zoombox_prev{
 	cursor:pointer;
 }
 #zoombox .multimedia .zoombox_next,#zoombox .multimedia .zoombox_prev{
@@ -188,6 +188,78 @@
 	right:10px;
 	bottom:36px;
 }
+
+/** Scaler Custom Theme **/
+.scale-custom .zoombox_container{
+	background:#000;
+}
+.scale-custom .zoombox_title{
+	color:#FFF;
+	/*+placement:anchor-top-left -1px -22px;*/
+	position:absolute;
+	left:-1px;
+	top:-22px;
+	/*+text-shadow:1px 1px #000000;*/
+	-moz-text-shadow:1px 1px #000000;
+	-webkit-text-shadow:1px 1px #000000;
+	-o-text-shadow:1px 1px #000000;
+	text-shadow:1px 1px #000000;
+	-moz-text-shadow:1px 1px #000;
+	-webkit-text-shadow:1px 1px #000;
+	-o-text-shadow:1px 1px #000;
+	text-shadow:1px 1px #000;
+}
+#zoombox.scale-custom .zoombox_next{
+	background:url(../img/glyphicons-224-chevron-right.png) no-repeat center;
+	/*+opacity:100%;*/
+	filter:alpha(opacity=100);
+	-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+	-moz-opacity:1;
+	opacity:1;
+	right:-20px;
+	width:20px;
+}
+#zoombox.scale-custom .zoombox_next:hover{
+	background-position-x:left;
+}
+#zoombox.scale-custom .zoombox_prev{
+	background:url(../img/glyphicons-225-chevron-left.png) no-repeat center;
+	/*+opacity:100%;*/
+	filter:alpha(opacity=100);
+	-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+	-moz-opacity:1;
+	opacity:1;
+	left:-20px;
+	width:20px;
+}
+#zoombox.scale-custom .zoombox_prev:hover{
+	background-position-x:-60px;
+}
+.scale-custom .zoombox_prev{
+	background:url(../img/glyphicons-225-chevron-left.png) no-repeat left center;
+}
+.scale-custom .zoombox_scale{
+	background:url(../img/glyphicons-69-ruler.png) no-repeat;
+	width:30px;
+	height:30px;
+	position:absolute;
+	top:2px;
+	right:25px;
+}
+
+.scale-custom .zoombox_close{
+	background:url(../img/glyphicons-208-remove-2.png) no-repeat;
+	width:30px;
+	height:30px;
+	position:absolute;
+	top:0;
+	right:-10px;
+}
+
+#zoombox.scale-custom .multimedia .zoombox_next,#zoombox.simple .multimedia .zoombox_prev{
+	display:block;
+}
+
 /** Pretty Photo Theme **/
 .prettyphoto .zoombox_container{
 	border:10px solid #0B0A0A;
@@ -328,4 +400,11 @@
 
 #zoombox.simple .multimedia .zoombox_next,#zoombox.simple .multimedia .zoombox_prev{
 	display:block;
+}
+
+.modal-backdrop {
+	z-index: 2040;
+}
+.modal {
+	z-index: 2050
 }

@@ -8,9 +8,13 @@
 	<meta name="description" content="A JS gallery that sizes things to real life.">
 	<meta name="author" content="Jordan Slaman">
 
+
+	<link rel="stylesheet" href="src/bootstrap/css/bootstrap.css">
+
 	<link rel="stylesheet" href="css/demostyle.css">
 	<!--<link rel="stylesheet" href="src/ZoomBox/zoombox.css">-->
 	<link rel="stylesheet" href="css/zoombox_scaler.css">
+
 
 	<!--[if lt IE 9]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -43,9 +47,28 @@
 		  </li>
 		</ul>
 	</div>
-	<script src="src/jquery.js"></script>
+
+	<!-- Dependancies -->
+	<script src="src/jquery-1.11.3.min.js"></script>
+	<script src="src/bootstrap/js/bootstrap.min.js"></script>
 	<!--<script src="src/ZoomBox/zoombox.js"></script>-->
+
 	<script src="js/zoombox_scaler.js"></script>
-	<script src="js/demoscript.js"></script>
+	<script type="text/javascript">
+		jQuery(function($){
+		    $('a.zoombox').zoombox({
+		        theme       : 'scale-custom',        //available default themes : zoombox,lightbox, prettyphoto, darkprettyphoto, simple
+		        opacity     : 0.8,              // Black overlay opacity
+		        duration    : 800,              // Animation duration
+		        animation   : true,             // Do we have to animate the box ?
+		        width       : 600,              // Default width
+		        height      : 400,              // Default height
+		        gallery     : true,             // Allow gallery thumb view
+		        autoplay    : false,                // Autoplay for video
+		        overflow    : false,
+		        display_scaler : true           //Scale that bitch
+		    });
+		});
+</script>
 </body>
 </html>
