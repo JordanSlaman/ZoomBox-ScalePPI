@@ -8,8 +8,8 @@ This repository is hosted live at http://scaler.jordanslaman.com/
 Soft fail for mobile.
 
 Calibration modals
-	Credit card implement http://jsfiddle.net/bzz190ww/
-	Javascript for detection/autofill
+	Credit Card Modal returns an actual PPI value.
+	Javascript detection in main modal, and autocompute PPI when Manually entered.
 
 The actual scaling...
 

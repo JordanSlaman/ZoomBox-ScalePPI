@@ -8,8 +8,10 @@
 	<meta name="description" content="A JS gallery that sizes things to real life.">
 	<meta name="author" content="Jordan Slaman">
 
+    <link rel="shortcut icon" href="http://static.jordanslaman.com/img/me/favicon.ico">
 
-	<link rel="stylesheet" href="src/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="src/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="src/jquery-ui-1.11.4/jquery-ui.min.css">
 
 	<link rel="stylesheet" href="css/demostyle.css">
 	<!--<link rel="stylesheet" href="src/ZoomBox/zoombox.css">-->
@@ -26,23 +28,23 @@
 	<div id="content">
 		<ul>
 		  <li>
-		    <a href="http://i1232.photobucket.com/albums/ff372/Marcin_Gil/magnific%20example/flower1.jpg" title="Flower 1" class="zoombox zgallery1">
-		      <img src="http://i1232.photobucket.com/albums/ff372/Marcin_Gil/magnific%20example/flower1.jpg" data-scalefactor="" alt="" />
+		    <a href="http://scaler.jordanslaman.com/client_img/AIMG_9242.jpg" title="9242" class="zoombox zgallery1">
+		      <img src="http://scaler.jordanslaman.com/client_img/AIMG_9242.jpg" data-scalefactor="" alt="" />
 		    </a>
 		  </li>
 		  <li>
-		    <a href="http://i1232.photobucket.com/albums/ff372/Marcin_Gil/magnific%20example/flower2.jpg" title="Flower 2" class="zoombox zgallery1" data-description="Estibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non, consectetuer lobortis quis, varius in, purus. Integer ultrices posuere cubilia.">
-		      <img src="http://i1232.photobucket.com/albums/ff372/Marcin_Gil/magnific%20example/flower2.jpg" data-scalefactor="" alt="" />
+		    <a href="http://scaler.jordanslaman.com/client_img/AIMG_9245.jpg" title="9245" class="zoombox zgallery1" data-description="Estibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non, consectetuer lobortis quis, varius in, purus. Integer ultrices posuere cubilia.">
+		      <img src="http://scaler.jordanslaman.com/client_img/AIMG_9245.jpg" data-scalefactor="" alt="" />
 		    </a>
 		  </li>
 		   <li>
-		    <a href="http://i1232.photobucket.com/albums/ff372/Marcin_Gil/magnific%20example/flower3.jpg" title="Flower 3" class="zoombox zgallery2">
-		      <img src="http://i1232.photobucket.com/albums/ff372/Marcin_Gil/magnific%20example/flower3.jpg" data-scalefactor="" alt="" />
+		    <a href="http://scaler.jordanslaman.com/client_img/AIMG_9279.jpg" title="9279" class="zoombox zgallery2">
+		      <img src="http://scaler.jordanslaman.com/client_img/AIMG_9279.jpg" data-scalefactor="" alt="" />
 		    </a>
 		  </li>
 		    <li>
-		    <a href="http://i1232.photobucket.com/albums/ff372/Marcin_Gil/magnific%20example/flower4.jpg" title="Flower 4" class="zoombox zgallery2"data-description="Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi.">
-		      <img src="http://i1232.photobucket.com/albums/ff372/Marcin_Gil/magnific%20example/flower4.jpg" data-scalefactor="" alt="" />
+		    <a href="http://scaler.jordanslaman.com/client_img/AIMG_9365.jpg" title="9365" class="zoombox zgallery2"data-description="Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi.">
+		      <img src="http://scaler.jordanslaman.com/client_img/AIMG_9365.jpg" data-scalefactor="" alt="" />
 		    </a>
 		  </li>
 		</ul>
@@ -50,10 +52,13 @@
 
 	<!-- Dependancies -->
 	<script src="src/jquery-1.11.3.min.js"></script>
+	<script src="src/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+
 	<script src="src/bootstrap/js/bootstrap.min.js"></script>
 	<!--<script src="src/ZoomBox/zoombox.js"></script>-->
 
 	<script src="js/zoombox_scaler.js"></script>
+
 	<script type="text/javascript">
 		jQuery(function($){
 		    $('a.zoombox').zoombox({

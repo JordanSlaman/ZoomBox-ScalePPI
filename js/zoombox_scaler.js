@@ -160,8 +160,9 @@ function load(){
 function build(){
     // We add the HTML Code on our page
     if(options.display_scaler) {
-        $.get("modals.html", function(data){
+        $.get("calibration_modals.html", function(data){
             $('body').append(data);
+
         });
 
         $('body').append(html_scaler);

@@ -99,7 +99,7 @@
 	opacity:1;
 }
 #zoombox_loader{
-	background:url(img/loader.png) no-repeat left top;
+	background:url(../img/loader.png) no-repeat left top;
 	position:absolute;
 	height:40px;
 	width:40px;
@@ -402,13 +402,3 @@
 	display:block;
 }
 
-.modal-backdrop {
-	z-index: 2040;
-}
-.modal {
-	z-index: 2050;
-}
-
-.ccmodal {
-	z-index: 3050;
-}

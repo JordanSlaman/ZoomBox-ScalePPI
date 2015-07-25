@@ -1,11 +1,46 @@
+<style type="text/css">
+  /* Modals CSS - Include in modals HTML? */
+  .modal-backdrop {
+    z-index: 2040;
+  }
+  .modal {
+    z-index: 2050;
+  }
+  .ccmodal {
+    z-index: 3050;
+  }
+
+  #creditCardBody {
+    min-height: 500px;
+  }
+
+  #flex {
+      background-image:url('../img/credit-card.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 290px;
+      width: 470px;
+      padding: 0.5em;
+  }
+  #flex h3 {
+      text-align:center;
+      margin: 0;
+  }
+  #ppi {
+      color:white;
+  }
+
+
+</style>
+
 
 <!-- Main Calibration Modal -->
-<div class="modal fade" id="calibrateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="calibrateModal" tabindex="-1" role="dialog" aria-labelledby="Calibration">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Calibration</h4>
+        <h4 class="modal-title" id="Calibration">Calibration</h4>
       </div>
       <div class="modal-body">
         <div class="container-fluid">
@@ -59,15 +94,17 @@
 </div>
 
 <!-- Credit Card Calibration Modal -->
-<div class="modal fade ccmodal" id="creditCardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
+<div class="modal fade ccmodal" id="creditCardModal" tabindex="-1" role="dialog" aria-labelledby="Credit Card Calibration" data-backdrop="false">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Credit Card Calibration</h4>
+        <h4 class="modal-title" id="Credit Card Calibration">Credit Card Calibration</h4>
       </div>
-      <div class="modal-body">
-        
+      <div class="modal-body" id="creditCardBody">
+          <div id="flex">
+            <h3 id="ppi">Resizable - Height (px)</h3>
+          </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -76,3 +113,20 @@
     </div>
   </div>
 </div>
+
+<script>
+/* dpi autofill & validation */
+
+/* Credit Card */
+
+$('#creditCardModal').on('shown', function(){
+  $("#flex").resizable({
+      aspectRatio: 4700 / 2900,
+      containment: "#creditCardBody",
+      resize: function (event, ui) {
+          $("#ppi").html($("#flex").height());
+      }
+  });
+});
+
+</script>
