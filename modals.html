@@ -8,7 +8,47 @@
         <h4 class="modal-title" id="myModalLabel">Calibration</h4>
       </div>
       <div class="modal-body">
-        In order to use the scaling feature you must first
+        <div class="container-fluid">
+          <div class="row">
+            <p>In order to use the scaling feature you must first calibrate your display.</p>
+
+            <p>You can use a credit card, or if you already know some things about your screen you can type them in here: </p>
+          </div>
+
+
+          <!-- This will eventually attempt to autofill -->
+          <form>
+
+            <div class="form-group row">
+              <div class="col-md-4">
+                <label for="dimension" class="control-label">Screen Size (in)</label>
+                <input type="text" class="form-control" id="dimension" placeholder="13.3">
+              </div>
+
+              <div class="col-md-4">
+                <label for="horizontal" class="control-label">Horizontal (px)</label>
+                <input type="text" class="form-control" id="horizontal" placeholder="2560"></input>
+              </div>
+              <div class="col-md-4">
+                <label for="horizontal" class="control-label">Vertical (px)</label>
+                <input type="text" class="form-control" id="vertical" placeholder="1600"></input>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-8">
+                <button type="button" class="btn btn-primary" style="margin-top:25px;" data-toggle="modal" data-target="#creditCardModal">I don't know these, but I have a credit card.</button>
+              </div>
+
+              <div class="col-md-4">
+                <label for="ppi" class="control-label">PPI</label>
+                <input type="text" class="form-control" id="ppi" placeholder="227"></input>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -19,15 +59,15 @@
 </div>
 
 <!-- Credit Card Calibration Modal -->
-<div class="modal fade" id="creditCardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade ccmodal" id="creditCardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">Credit Card Calibration</h4>
       </div>
       <div class="modal-body">
-        ...
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
