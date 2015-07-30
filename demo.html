@@ -10,12 +10,33 @@
 
     <link rel="shortcut icon" href="http://static.jordanslaman.com/img/me/favicon.ico">
 
+    <!-- External CSS Dependancies -->
 	<link rel="stylesheet" href="src/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="src/jquery-ui-1.11.4/jquery-ui.min.css">
 
+	<!-- Style for this demo page, not necessary for gallery. -->
 	<link rel="stylesheet" href="css/demostyle.css">
-	<!--<link rel="stylesheet" href="src/ZoomBox/zoombox.css">-->
+
+	<!-- Default Zoombox Stylesheet
+	<link rel="stylesheet" href="src/ZoomBox/zoombox.css">
+	-->
+
+	<!-- Appended Zoombox Stylesheet with some CSS modifications -->
 	<link rel="stylesheet" href="css/zoombox_scaler.css">
+
+
+	<!-- External CSS Dependancied -->
+	<script src="src/jquery-1.11.3.min.js"></script>
+	<script src="src/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+	<script src="src/bootstrap/js/bootstrap.min.js"></script>
+
+
+	<!-- Default Zoombox
+	<script src="src/ZoomBox/zoombox.js"></script>
+	-->
+
+	<!-- Modified Zoombox with scaler -->
+	<script src="js/zoombox_scaler.js"></script>
 
 
 	<!--[if lt IE 9]>
@@ -26,10 +47,13 @@
 
 <body>
 	<div id="content">
+
+
+		<!-- Zoombox HTML-->
 		<ul>
 		  <li>
-		    <a href="http://scaler.jordanslaman.com/client_img/AIMG_9242.jpg" title="9242" class="zoombox zgallery1">
-		      <img src="http://scaler.jordanslaman.com/client_img/AIMG_9242.jpg" data-scalefactor="" alt="" />
+		    <a href="http://scaler.jordanslaman.com/client_img/AIMG_9242.jpg" title="9242" class="zoombox zgallery1"> <!-- Anchor with title, gallery class -->
+		      <img src="http://scaler.jordanslaman.com/client_img/AIMG_9242.jpg" data-scalefactor="" alt="" /> <!-- Image source, scale ratio -->
 		    </a>
 		  </li>
 		  <li>
@@ -48,17 +72,11 @@
 		    </a>
 		  </li>
 		</ul>
+		<!-- End Zoombox HTML-->
+
 	</div>
 
-	<!-- Dependancies -->
-	<script src="src/jquery-1.11.3.min.js"></script>
-	<script src="src/jquery-ui-1.11.4/jquery-ui.min.js"></script>
-
-	<script src="src/bootstrap/js/bootstrap.min.js"></script>
-	<!--<script src="src/ZoomBox/zoombox.js"></script>-->
-
-	<script src="js/zoombox_scaler.js"></script>
-
+	<!-- Zoombox script with scaler toggle, without it's just zoombox. -->
 	<script type="text/javascript">
 		jQuery(function($){
 		    $('a.zoombox').zoombox({
@@ -71,9 +89,11 @@
 		        gallery     : true,             // Allow gallery thumb view
 		        autoplay    : false,                // Autoplay for video
 		        overflow    : false,
-		        display_scaler : true           //Scale that bitch
+		        display_scaler : true           //Scale IT!
 		    });
 		});
-</script>
+	</script>
+
+
 </body>
 </html>

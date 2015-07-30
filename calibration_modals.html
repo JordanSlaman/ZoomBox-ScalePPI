@@ -1,3 +1,6 @@
+<!-- Calibratoion Dialogs -->
+<!-- will need french version for client, prioritize ccCalibration -->
+
 <style type="text/css">
   /* Modals CSS - Include in modals HTML? */
   .modal-backdrop {
@@ -15,11 +18,11 @@
   }
 
   #flex {
-      background-image:url('../img/credit-card.png');
+      background-image:url('../img/300dpi_card.png');
       background-size: cover;
       background-repeat: no-repeat;
-      height: 290px;
-      width: 470px;
+      height: 212.66666667px;
+      width: 337px;
       padding: 0.5em;
   }
   #flex h3 {
@@ -32,7 +35,6 @@
 
 
 </style>
-
 
 <!-- Main Calibration Modal -->
 <div class="modal fade" id="calibrateModal" tabindex="-1" role="dialog" aria-labelledby="Calibration">
@@ -87,7 +89,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary">Save PPI</button>
       </div>
     </div>
   </div>
@@ -102,13 +104,11 @@
         <h4 class="modal-title" id="Credit Card Calibration">Credit Card Calibration</h4>
       </div>
       <div class="modal-body" id="creditCardBody">
-          <div id="flex">
-            <h3 id="ppi">Resizable - Height (px)</h3>
-          </div>
+          <div id="flex"></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" id="ccSave">Save</button>
       </div>
     </div>
   </div>
@@ -117,14 +117,47 @@
 <script>
 /* dpi autofill & validation */
 
+// From dpi.lv
+  var hashRegex = /^#(\d+)[x×](\d+)(@(\d*\.?\d+)["″])?|(\d*\.?\d+)["″]$/;
+
+  var dppx = window.devicePixelRatio ||
+      (window.matchMedia && window.matchMedia("(min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 1.5),(-moz-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)").matches? 2 : 1) ||
+      1;
+
+  function calcDpi(w, h, d, opt) {
+    // Calculate PPI/DPI
+    w>0 || (w=1);
+    h>0 || (h=1);
+    opt || (opt='d');
+    var dpi = (opt=='d' ? Math.sqrt(w*w + h*h) : opt=='w' ? w : h) / d;
+    return dpi>0 ? Math.round(dpi) : 0;
+  }
+
+/* Calibrate Modal */
+$('#calibrateModal').on('shown', function(){
+  console.log('Shown Calibrate Modal');
+
+/*
+  $('input#horizontal').val(screen.width);
+  $('input#vertical').val(screen.height);
+  $('input#dimension').val(physical.value);
+
+  $('input#ppi').val(calcDpi(screen.width * dppx, screen.height * dppx, physical.value, dimension.value));
+
+  console.log('Values should be set...');
+  */
+});
+
+
 /* Credit Card */
 
 $('#creditCardModal').on('shown', function(){
   $("#flex").resizable({
-      aspectRatio: 4700 / 2900,
+      aspectRatio: 1011/638,
       containment: "#creditCardBody",
       resize: function (event, ui) {
-          $("#ppi").html($("#flex").height());
+        ppi = $("#flex").width()/3.370;
+        $("#ccSave").html('Save - ' + ppi);
       }
   });
 });
