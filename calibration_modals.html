@@ -23,7 +23,8 @@
       background-repeat: no-repeat;
       height: 212.66666667px;
       width: 337px;
-      padding: 0.5em;
+      padding: 0px;
+      border: 1px blue dashed;
   }
   #flex h3 {
       text-align:center;
@@ -32,6 +33,7 @@
   #ppi {
       color:white;
   }
+
 
 
 </style>
@@ -117,21 +119,6 @@
 <script>
 /* dpi autofill & validation */
 
-// From dpi.lv
-  var hashRegex = /^#(\d+)[x×](\d+)(@(\d*\.?\d+)["″])?|(\d*\.?\d+)["″]$/;
-
-  var dppx = window.devicePixelRatio ||
-      (window.matchMedia && window.matchMedia("(min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 1.5),(-moz-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)").matches? 2 : 1) ||
-      1;
-
-  function calcDpi(w, h, d, opt) {
-    // Calculate PPI/DPI
-    w>0 || (w=1);
-    h>0 || (h=1);
-    opt || (opt='d');
-    var dpi = (opt=='d' ? Math.sqrt(w*w + h*h) : opt=='w' ? w : h) / d;
-    return dpi>0 ? Math.round(dpi) : 0;
-  }
 
 /* Calibrate Modal */
 $('#calibrateModal').on('shown', function(){
@@ -153,11 +140,17 @@ $('#calibrateModal').on('shown', function(){
 
 $('#creditCardModal').on('shown', function(){
   $("#flex").resizable({
-      aspectRatio: 1011/638,
+      aspectRatio: 1011/638, 
+      //Taken from original image size in pixels, = 1.5846394984
+      //cc Aspect is 85.60/53.98 = 1.5857725083
       containment: "#creditCardBody",
       resize: function (event, ui) {
-        ppi = $("#flex").width()/3.370;
-        $("#ccSave").html('Save - ' + ppi);
+
+        pixels_per_milimeter = $("#flex").width()/85.60;
+        console.log(pixels_per_milimeter);
+        //pixels_per_inch = $("#flex").width()/3.370;
+        //$("#ccSave").html('Save - ' + pixels_per_milimeter);
+
       }
   });
 });

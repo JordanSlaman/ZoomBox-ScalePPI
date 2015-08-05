@@ -1,0 +1,172 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>Scaling Tool</title>
+	<meta name="description" content="Tool for establishing the PPI of an Image based on some known dimensions.">
+	<meta name="author" content="Jordan Slaman">
+
+    <link rel="shortcut icon" href="http://static.jordanslaman.com/img/me/favicon.ico">
+
+    <!-- External CSS Dependancies -->
+	<link rel="stylesheet" href="src/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="src/jquery-ui-1.11.4/jquery-ui.min.css">
+
+
+	<!-- External JS Dependancies -->
+	<script src="src/jquery-1.11.3.min.js"></script>
+	<script src="src/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+	<script src="src/bootstrap/js/bootstrap.min.js"></script>
+
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<style type="text/css">
+		body {
+			background: #ddd;
+		}
+		#container {
+			background: #fff;
+			min-height: 800px;
+			margin: 40px auto;
+			border: 1px #ccc dashed;
+
+		}
+
+		#box {
+			width:300px;
+			height:150px;
+			background: rgba(10, 255, 225, 0.2);
+			border: 1px black dashed;
+			z-index: 1;
+			top:230px;
+			left:150px;
+		}
+
+		#image {
+			width:100%;
+			min-height: 620px;
+			background-size:100%;
+    		background-repeat: no-repeat;
+		}
+
+		#inner {
+
+		}
+	</style>
+
+</head>
+
+
+<body>
+
+	<div id="container" class="container">
+
+		<div class="row" style="padding:25px;">
+
+			<div class="col-md-6">
+				<label for="imageURL">Image Location</label>
+				<input type="url" class="form-control" id="imageURL" value="http://scaler.jordanslaman.com/client_img/AIMG_9242.jpg">
+				<!--
+				<p></p>
+
+				<label for="fileUpload">Upload New</label>
+				<input type="file" id="fileUpload">
+				<p class="help-block">This feature is not yet implemented.</p>
+				-->
+			</div>
+			<div class="col-md-2">
+				<button id="load" class="btn btn-default" style="margin-top: 25px;">Load</button>
+			</div>
+
+		  </div>
+
+		 <div class="row">
+			<div id="imageContainer" style="padding:20px;" >
+				<div id="image" class="col-md-12" style="background-image: url('http://scaler.jordanslaman.com/client_img/AIMG_9257.jpg');">
+					<div id="box">
+						<div id="inner" style="margin:15px;">
+							<input id="innerWidth" value="48" style="width:40px;"></input>mm wide
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-3">
+				<label for="imageTitle">Image Title</label>
+				<input type="text" class="form-control" id="imageTitle" value="9242">
+			</div>
+			<div class="col-md-3">
+				<label for="imageGallery">Image Gallery</label>
+				<input type="text" class="form-control" id="imageGallery" value="zgallery1">
+			</div>
+			<div class="col-md-6">
+				<label for="imageCaption">Image Caption</label>
+				<input type="text" class="form-control" id="imageCaption" value="Caption"></input>
+			</div>
+			<input type="text" style="display:none;" id="scaleFactor"></input>
+		</div>
+
+		<div class="row" style="padding-top:15px;">
+			<div class="col-md-12">	
+				<pre id="output"></pre>
+			</div>
+		</div>
+
+	</div>
+
+
+	<script type="text/javascript">
+		$("#box").draggable({
+			containment: "imageContainer"
+		});
+
+		//We need to come up with a 'scalefactor' to scale the image
+		$("#box").resizable({
+			resize: function (event, ui) {
+				//get the size of the blue box
+				inner_pixels_per_mm = $("#box").width()/$("#innerWidth").val();
+
+				//how many blue boxes are in the image?
+				inners_per_image = $("#image").width()/$("#box").width();
+
+				//The amount of blue boxes by their size in mm
+				mm_per_image = inners_per_image * inner_pixels_per_mm;
+
+				$("#scaleFactor").val(mm_per_image);
+
+				update();
+			}
+		});
+
+		//scalefactor, gallery box
+
+		function update() {
+			$('#output').html('&lt;li&gt;<p>	&lt;a href="'+$("#imageURL").val()+'" title="'+$("#imageTitle").val()+'" class="zoombox '+$("#imageGallery").val()+'" data-description="'+$("#imageCaption").val()+'"&gt;<p>		&lt;img src="'+$("#imageURL").val()+'" data-scalefactor="'+$("#scaleFactor").val()+'" alt="" /&gt;<p>	&lt;/a&gt;<p>&lt;/li&gt;');
+		}
+
+		function updateURL() {
+			$("#image").css({
+				'background-image' :' url("'+$("#imageURL").val()+'")'
+			});
+			update();
+		}
+
+		update();
+
+		$('#load').click(updateURL);
+		$('#imageURL').change(update);
+		$('#imageGallery').change(update);
+		$('#imageTitle').change(update);
+		$('#imageCaption').change(update);
+	</script>
+
+
+</body>
+</html>

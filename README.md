@@ -18,3 +18,7 @@ The actual scaling...
 
 
 Upload/setup portion.
+
+---
+
+Hrs - 17.5
