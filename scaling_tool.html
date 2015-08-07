@@ -69,7 +69,7 @@
 
 			<div class="col-md-6">
 				<label for="imageURL">Image Location</label>
-				<input type="url" class="form-control" id="imageURL" value="http://scaler.jordanslaman.com/client_img/AIMG_9242.jpg">
+				<input type="url" class="form-control" id="imageURL" value="http://scaler.jordanslaman.com/img/scale_test.jpeg">
 				<!--
 				<p></p>
 
@@ -86,10 +86,10 @@
 
 		 <div class="row">
 			<div id="imageContainer" style="padding:20px;" >
-				<div id="image" class="col-md-12" style="background-image: url('http://scaler.jordanslaman.com/client_img/AIMG_9257.jpg');">
+				<div id="image" class="col-md-12" style="background-image: url('http://scaler.jordanslaman.com/img/scale_test.jpeg');">
 					<div id="box">
 						<div id="inner" style="margin:15px;">
-							<input id="innerWidth" value="48" style="width:40px;"></input>mm wide
+							<input id="innerWidth" value="58.6" style="width:40px;"></input>mm wide
 						</div>
 					</div>
 				</div>
@@ -100,7 +100,7 @@
 		<div class="row">
 			<div class="col-md-3">
 				<label for="imageTitle">Image Title</label>
-				<input type="text" class="form-control" id="imageTitle" value="9242">
+				<input type="text" class="form-control" id="imageTitle" value="iPhone 5S">
 			</div>
 			<div class="col-md-3">
 				<label for="imageGallery">Image Gallery</label>
@@ -108,9 +108,9 @@
 			</div>
 			<div class="col-md-6">
 				<label for="imageCaption">Image Caption</label>
-				<input type="text" class="form-control" id="imageCaption" value="Caption"></input>
+				<input type="text" class="form-control" id="imageCaption" value="iPhone 5S Test Image!"></input>
 			</div>
-			<input type="text" style="display:none;" id="scaleFactor"></input>
+			<input type="text" style="display:none;" id="scaleFactor" value="289.3827160493827"></input>
 		</div>
 
 		<div class="row" style="padding-top:15px;">
@@ -123,48 +123,66 @@
 
 
 	<script type="text/javascript">
+
 		$("#box").draggable({
 			containment: "imageContainer"
 		});
 
-		//We need to come up with a 'scalefactor' to scale the image
 		$("#box").resizable({
-			resize: function (event, ui) {
-				//get the size of the blue box
-				inner_pixels_per_mm = $("#box").width()/$("#innerWidth").val();
-
-				//how many blue boxes are in the image?
-				inners_per_image = $("#image").width()/$("#box").width();
-
-				//The amount of blue boxes by their size in mm
-				mm_per_image = inners_per_image * inner_pixels_per_mm;
-
-				$("#scaleFactor").val(mm_per_image);
-
-				update();
+			resize: function( event, ui ) {
+				updateScaleFactor()
 			}
 		});
 
-		//scalefactor, gallery box
+		var imageNaturalWidth;
 
-		function update() {
-			$('#output').html('&lt;li&gt;<p>	&lt;a href="'+$("#imageURL").val()+'" title="'+$("#imageTitle").val()+'" class="zoombox '+$("#imageGallery").val()+'" data-description="'+$("#imageCaption").val()+'"&gt;<p>		&lt;img src="'+$("#imageURL").val()+'" data-scalefactor="'+$("#scaleFactor").val()+'" alt="" /&gt;<p>	&lt;/a&gt;<p>&lt;/li&gt;');
-		}
+		updateURL(); //Loads an image and sets it's natural dimensions.
+
 
 		function updateURL() {
 			$("#image").css({
 				'background-image' :' url("'+$("#imageURL").val()+'")'
 			});
-			update();
+
+			/*
+			// Create new offscreen image to get true (not rendered) image dimensions, replaced with .width() for our implementation.
+
+
+			var theImage = new Image();
+			theImage.src = $("#imageURL").val();
+			theImage.onload = function() {
+				imageNaturalWidth = theImage.naturalWidth;
+			}
+
+			*/
+
+			updateScaleFactor();
 		}
 
-		update();
+		function updateScaleFactor() {
+
+			//how many blue boxes are in the image?
+			boxes_per_image = $("#image").width()/$("#box").width();
+
+			//The amount of blue boxes by their size in mm
+			mm_per_image = boxes_per_image * $("#innerWidth").val();
+
+			$("#scaleFactor").val(mm_per_image);
+
+			updateText();
+
+		}
+
+		function updateText() {
+			$('#output').html('&lt;li&gt;<br>	&lt;a href="'+$("#imageURL").val()+'" title="'+$("#imageTitle").val()+'" class="zoombox '+$("#imageGallery").val()+'" data-description="'+$("#imageCaption").val()+'"&gt;<br>		&lt;img src="'+$("#imageURL").val()+'" data-scalefactor="'+$("#scaleFactor").val()+'" alt="'+$("#imageCaption").val()+'" /&gt;<br>	&lt;/a&gt;<br>&lt;/li&gt;');
+		}
 
 		$('#load').click(updateURL);
-		$('#imageURL').change(update);
-		$('#imageGallery').change(update);
-		$('#imageTitle').change(update);
-		$('#imageCaption').change(update);
+		$('#imageURL').change(updateText);
+		$('#imageGallery').change(updateText);
+		$('#imageTitle').change(updateText);
+		$('#imageCaption').change(updateText);
+
 	</script>
 
 

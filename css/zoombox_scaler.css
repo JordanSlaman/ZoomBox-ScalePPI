@@ -50,7 +50,7 @@
 	-moz-opacity:0;
 	opacity:0;
 }
-#zoombox .zoombox_close,#zoombox .zoombox_scale,#zoombox .zoombox_next,#zoombox .zoombox_prev{
+#zoombox .zoombox_close,#zoombox .zoombox_scale,#zoombox .zoombox_calibrate,#zoombox .zoombox_next,#zoombox .zoombox_prev{
 	cursor:pointer;
 }
 #zoombox .multimedia .zoombox_next,#zoombox .multimedia .zoombox_prev{
@@ -216,7 +216,7 @@
 	-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
 	-moz-opacity:1;
 	opacity:1;
-	right:-20px;
+	right:-2px;
 	width:20px;
 }
 #zoombox.scale-custom .zoombox_next:hover{
@@ -229,7 +229,7 @@
 	-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
 	-moz-opacity:1;
 	opacity:1;
-	left:-20px;
+	left:-2px;
 	width:20px;
 }
 #zoombox.scale-custom .zoombox_prev:hover{
@@ -243,8 +243,17 @@
 	width:30px;
 	height:30px;
 	position:absolute;
-	top:2px;
+	top:15px;
 	right:25px;
+}
+
+.scale-custom .zoombox_calibrate{
+	background:url(../img/glyphicons-186-screenshot.png) no-repeat;
+	width:30px;
+	height:30px;
+	position:absolute;
+	top:8px;
+	right:55px;
 }
 
 .scale-custom .zoombox_close{
@@ -252,8 +261,8 @@
 	width:30px;
 	height:30px;
 	position:absolute;
-	top:0;
-	right:-10px;
+	top:10px;
+	right:-7px;
 }
 
 #zoombox.scale-custom .multimedia .zoombox_next,#zoombox.simple .multimedia .zoombox_prev{

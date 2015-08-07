@@ -2,8 +2,6 @@
 Scales images to life-size with calibration.
 
 Modified from http://github.com/Grafikart/Zoombox
-DPI detection code lovingly modified from https://github.com/LeaVerou/dpi - http://dpi.lv/
-
 
 This repository is hosted live at http://scaler.jordanslaman.com/
 
@@ -11,14 +9,21 @@ This repository is hosted live at http://scaler.jordanslaman.com/
 Soft fail for mobile.
 
 Calibration modals
-	Credit Card Modal returns an actual PPI value.
+	Credit Card Modal returns an actual PPI value that zoombox can use - insert into dom?
 	Javascript detection in main modal, and autocompute PPI when Manually entered.
 
-The actual scaling...
 
+Scaling
+	uses ppmm and scalefactor values instead of hardcoded.
+	fix window pos, animation
+	buttons toggle.
 
-Upload/setup portion.
+Styling
+	visual cues about 
+
+Scaling tool
+	Test Button, insert gallery into dom
 
 ---
 
-Hrs - 17.5
+22
