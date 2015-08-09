@@ -37,13 +37,13 @@
 		}
 
 		#box {
-			width:300px;
+			width:244px;
 			height:150px;
 			background: rgba(10, 255, 225, 0.2);
 			border: 1px black dashed;
 			z-index: 1;
 			top:230px;
-			left:150px;
+			left:292px;
 		}
 
 		#image {
@@ -98,17 +98,22 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<label for="imageTitle">Image Title</label>
 				<input type="text" class="form-control" id="imageTitle" value="iPhone 5S">
-			</div>
-			<div class="col-md-3">
-				<label for="imageGallery">Image Gallery</label>
-				<input type="text" class="form-control" id="imageGallery" value="zgallery1">
 			</div>
 			<div class="col-md-6">
 				<label for="imageCaption">Image Caption</label>
 				<input type="text" class="form-control" id="imageCaption" value="iPhone 5S Test Image!"></input>
+			</div>
+			<div class="col-md-2">
+				<label for="imageGallery">Image Gallery</label>
+				<input type="text" class="form-control" id="imageGallery" value="zgallery1">
+			</div>
+			<div class="col-md-2 checkbox">
+				<label style="padding-top:20px;">
+					<input type="checkbox" id="hideThumb" > Hide Thumbnail
+				</label>
 			</div>
 			<input type="text" style="display:none;" id="scaleFactor" value="289.3827160493827"></input>
 		</div>
@@ -174,7 +179,12 @@
 		}
 
 		function updateText() {
-			$('#output').html('&lt;li&gt;<br>	&lt;a href="'+$("#imageURL").val()+'" title="'+$("#imageTitle").val()+'" class="zoombox '+$("#imageGallery").val()+'" data-description="'+$("#imageCaption").val()+'"&gt;<br>		&lt;img src="'+$("#imageURL").val()+'" data-scalefactor="'+$("#scaleFactor").val()+'" alt="'+$("#imageCaption").val()+'" /&gt;<br>	&lt;/a&gt;<br>&lt;/li&gt;');
+			var hideThumb = "";
+			if($("#hideThumb").is(':checked')){
+				hideThumb = " style=\"display:none;\"";
+			}
+
+			$('#output').html('&lt;li'+hideThumb+'&gt;<br>	&lt;a href="'+$("#imageURL").val()+'" title="'+$("#imageTitle").val()+'" class="zoombox '+$("#imageGallery").val()+'" data-description="'+$("#imageCaption").val()+'"&gt;<br>		&lt;img src="'+$("#imageURL").val()+'" data-scalefactor="'+$("#scaleFactor").val()+'" alt="'+$("#imageCaption").val()+'" /&gt;<br>	&lt;/a&gt;<br>&lt;/li&gt;');
 		}
 
 		$('#load').click(updateURL);
@@ -182,6 +192,7 @@
 		$('#imageGallery').change(updateText);
 		$('#imageTitle').change(updateText);
 		$('#imageCaption').change(updateText);
+		$('#hideThumb').change(updateText);
 
 	</script>
 

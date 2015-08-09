@@ -38,65 +38,6 @@
 
 </style>
 
-<script>
-/* dpi autofill & validation */
-
-
-/* Calibrate Modal */
-$('#calibrateModal').on('shown', function(){
-  console.log('Shown Calibrate Modal');
-
-/*
-  $('input#horizontal').val(screen.width);
-  $('input#vertical').val(screen.height);
-  $('input#dimension').val(physical.value);
-
-  $('input#ppi').val(calcDpi(screen.width * dppx, screen.height * dppx, physical.value, dimension.value));
-
-  console.log('Values should be set...');
-*/
-  
-});
-
-
-/* Credit Card -- !! Currently broken, used to work !! */
-/*
-$('#creditCardModal').on('shown', function(){
-  $("#flex").resizable({
-      aspectRatio: 1011/638, 
-      //Taken from original image size in pixels, = 1.5846394984
-      //cc Aspect is 85.60/53.98 = 1.5857725083
-      containment: "#creditCardBody",
-      resize: function (event, ui) {
-
-        pixels_per_milimeter = $("#flex").width()/85.60
-        console.log(pixels_per_milimeter)
-        //pixels_per_inch = $("#flex").width()/3.370;
-        //$("#ccSave").html('Save - ' + pixels_per_milimeter);
-      }
-  });
-});
-*/
-
-$('#creditCardBody').load(function () {
-  console.log('load event fired!');
-  $("#flex").resizable({
-      aspectRatio: 1011/638, 
-      //Taken from original image size in pixels, = 1.5846394984
-      //cc Aspect is 85.60/53.98 = 1.5857725083
-      containment: "#creditCardBody",
-      resize: function (event, ui) {
-
-        pixels_per_mm = $("#flex").width()/85.60
-        console.log('Pixels per mm: '+pixels_per_mm)
-        //pixels_per_inch = $("#flex").width()/3.370;
-        //$("#ccSave").html('Save - ' + pixels_per_milimeter);
-      }
-  });
-});
-
-</script>
-
 <!-- Main Calibration Modal -->
 <div class="modal fade" id="calibrateModal" tabindex="-1" role="dialog" aria-labelledby="Calibration">
   <div class="modal-dialog" role="document">
