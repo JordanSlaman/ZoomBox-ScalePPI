@@ -3,7 +3,7 @@
 
 
 var scr=document.getElementsByTagName('script');
-var zoombox_path = scr[scr.length-1].getAttribute("src").replace('js/zoombox_scaler.js','');
+var zoombox_path = scr[scr.length-1].getAttribute("src").replace('zoombox_scaler.js','');
 
 (function($){
 
@@ -554,9 +554,9 @@ function scale(){
         calibrate();
     } else {
         resizeScaled = true;
-        $( "#scaleToggle" ).toggleClass(zoombox_scale, zoombox_scale_toggled);
-        //fix so more intuitive.
+        $( "#scaleToggle" ).toggleClass("zoombox_scale", "zoombox_scale_toggled");
         close();
+        //Relaunch
     }
 
 }
