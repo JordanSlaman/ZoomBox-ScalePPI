@@ -10,25 +10,24 @@
 
     <link rel="shortcut icon" href="http://static.jordanslaman.com/img/me/favicon.ico">
 
-    <!-- External CSS Dependancies -->
-	<link rel="stylesheet" href="src/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="src/jquery-ui-1.11.4/jquery-ui.min.css">
 
-	<!-- Style for this demo page, not necessary for gallery. -->
-	<!-- <link rel="stylesheet" href="css/demostyle.css"> -->
+    <!-- INCLUDE IN HEAD -->
+    <!-- External CSS Dependancies -->
+	<link rel="stylesheet" href="http://scaler.jordanslaman.com/src/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://scaler.jordanslaman.com/src/jquery-ui-1.11.4/jquery-ui.min.css">
 
 	<!-- Default Zoombox Stylesheet
 	<link rel="stylesheet" href="src/ZoomBox/zoombox.css">
 	-->
 
 	<!-- Appended Zoombox Stylesheet with some CSS modifications -->
-	<link rel="stylesheet" href="css/zoombox_scaler.css">
+	<link rel="stylesheet" href="http://scaler.jordanslaman.com/zoombox_scaler.css">
 
 
-	<!-- External CSS Dependancies -->
-	<script src="src/jquery-1.11.3.min.js"></script>
-	<script src="src/jquery-ui-1.11.4/jquery-ui.min.js"></script>
-	<script src="src/bootstrap/js/bootstrap.min.js"></script>
+	<!-- External JS Dependancies -->
+	<script src="http://scaler.jordanslaman.com/src/jquery-1.11.3.min.js"></script>
+	<script src="http://scaler.jordanslaman.com/src/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+	<script src="http://scaler.jordanslaman.com/src/bootstrap/js/bootstrap.min.js"></script>
 
 
 	<!-- Default Zoombox
@@ -36,7 +35,7 @@
 	-->
 
 	<!-- Modified Zoombox with scaler -->
-	<script src="js/zoombox_scaler.js"></script>
+	<script src="http://scaler.jordanslaman.com/js/zoombox_scaler.js"></script>
 
 
 	<!--[if lt IE 9]>
@@ -75,42 +74,57 @@
 
 	</style>
 
+	<!-- END HEAD INCLUDES, May want to remove body/content css -->
+
 </head>
 
 
 <body>
 	<div id="content" class="container">
 
-		<!-- Zoombox HTML-->
+		<!-- Zoombox List HTML-->
 		<ul>
 			<li>
-				<a href="http://scaler.jordanslaman.com/img/scale_test.jpeg" title="iPhone 5S" class="zoombox zgallery1" data-description="iPhone 5S Test Image!" data-scalefactor="265.8793388429752">
-					<img src="http://scaler.jordanslaman.com/img/scale_test.jpeg" data-scalefactor="265.8793388429752" alt="iPhone 5S Test Image!" />
+				<a href="http://scaler.jordanslaman.com/img/scale_test.jpeg" title="iPhone 5S" class="zoombox zgallery1" data-scalefactor="262.6236734693877" data-description="iPhone 5S Test Image!">
+					<img src="http://scaler.jordanslaman.com/img/scale_test.jpeg" alt="iPhone 5S Test Image!" />
 				</a>
 
 			</li>
+
+			<li style="display:none;">
+				<a href="http://preciseruler.com/img/ruler/inch/lSquareRulerInch.png" title="Ruler!" class="zoombox zgallery1" data-scalefactor="215.5053974484789" data-description="Ruler Test Image!">
+					<img src="http://preciseruler.com/img/ruler/inch/lSquareRulerInch.png" alt="Ruler Test Image!" />
+				</a>
+			</li>
+
 		</ul>
-		<!-- End Zoombox HTML-->
+
+
+		<!-- End Zoombox List HTML-->
 
 
 	</div>
 
 	<!-- Zoombox script with scaler toggle, without it's just zoombox. -->
 	<script type="text/javascript">
-		jQuery(function($){
-		    $('a.zoombox').zoombox({
-		        theme       : 'scale-custom',        //available default themes : zoombox,lightbox, prettyphoto, darkprettyphoto, simple
-		        opacity     : 0.8,              // Black overlay opacity
-		        duration    : 800,              // Animation duration
-		        animation   : true,             // Do we have to animate the box ?
-		        width       : 600,              // Default width
-		        height      : 400,              // Default height
-		        gallery     : true,             // Allow gallery thumb view
-		        autoplay    : false,                // Autoplay for video
-		        overflow    : false,
-		        display_scaler : true           //Scale IT!
-		    });
-		});
+
+	//Zoombox javascript
+	jQuery(function($){
+		$('a.zoombox').zoombox({
+	        theme       : 'scale-custom',        //available default themes : zoombox,lightbox, prettyphoto, darkprettyphoto, simple
+	        opacity     : 0.8,              // Black overlay opacity
+	        duration    : 800,              // Animation duration
+	        animation   : true,             // Do we have to animate the box ?
+	        width       : 600,              // Default width
+	        height      : 400,              // Default height
+	        gallery     : true,             // Allow gallery thumb view
+	        autoplay    : false,            // Autoplay for video
+	        overflow    : false,
+	        display_scaler : true,           //Scale it!
+	        french_modals : false			//In french?
+	    });
+	});
+
 	</script>
 
 

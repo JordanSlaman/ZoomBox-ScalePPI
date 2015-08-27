@@ -17,7 +17,8 @@ var options = {
     gallery     : true,                 // Allow gallery thumb view
     autoplay : false,                // Autoplay for video
     overflow  : false,               // Allow images bigger than screen ?
-    display_scaler : false
+    display_scaler : false,
+    french_modals : true
 }
 var images;         // Gallery Array [gallery name][link]
 var elem;           // HTML element currently used to display box
@@ -64,8 +65,8 @@ var html_scaler = '<div id="zoombox"> \
                     <div class="zoombox_title"></div>\
                     <div class="zoombox_next"></div>\
                     <div class="zoombox_prev"></div>\
-                    <div class="zoombox_calibrate"></div>\
-                    <div class="zoombox_scale"></div>\
+                    <div class="zoombox_calibrate" data-toggle="tooltip" data-placement="bottom" title="Calibrate your screen"></div>\
+                    <div id="scaleToggle" class="zoombox_scale" data-toggle="tooltip" data-placement="bottom" title="Toggle real sized view"></div>\
                     <div class="zoombox_close"></div>\
                 </div>\
                 <div class="zoombox_gallery"></div>\
@@ -172,25 +173,77 @@ function load(){
 function build(){
     // We add the HTML Code on our page
     if(options.display_scaler) {
-        $.get("calibration_modals.html", function(data){
-            $('body').append(data);
+        if(options.french_modals) {
+            $.get("http://scaler.jordanslaman.com/calibration_modals_fr.html", function(data){
+                $('body').append(data);
 
-            $("#flex").resizable({
-                aspectRatio: 1011/638, 
-                //Taken from original image size in pixels, = 1.5846394984
-                //cc Aspect is 85.60/53.98 = 1.5857725083
-                containment: "#creditCardBody",
-                resize: function (event, ui) {
+                pixels_per_mm = $("#flex").width()/85.60;
 
-                pixels_per_mm = $("#flex").width()/85.60
-                console.log('Pixels per mm: '+pixels_per_mm)
-                //pixels_per_inch = $("#flex").width()/3.370;
-                //$("#ccSave").html('Save - ' + pixels_per_milimeter);
-              }
+                $("#flex").resizable({
+                    aspectRatio: 1011/638, 
+                    //Taken from original image size in pixels, = 1.5846394984
+                    //cc Aspect is 85.60/53.98 = 1.5857725083
+                    containment: "#creditCardBody",
+                    resize: function (event, ui) {
+
+                    pixels_per_mm = $("#flex").width()/85.60
+                    
+                    //console.log('Pixels per mm: '+pixels_per_mm)
+                    
+                    //pixels_per_inch = $("#flex").width()/3.370;
+                    //$("#ccSave").html('Save - ' + pixels_per_milimeter);
+                  }
+                });
+
+                $("#ccSave").click(function() {
+                    console.log('Pixels per mm: '+pixels_per_mm)
+                });
+
+                $('.zoombox_calibrate').prop('title', 'Calibrer votre écran');
+                $('.zoombox_scale').prop('title', 'Activer la vue grandeur réelle');
+                $('.zoombox_scale_toggled').prop('title', 'Activer la vue grandeur réelle'); //NEED FRENCH TEXT
+
+                $(function () {
+                  $('[data-toggle="tooltip"]').tooltip()
+                })
+
             });
+        } else {
+            $.get("http://scaler.jordanslaman.com/calibration_modals_en.html", function(data){
+                $('body').append(data);
 
-        });
+                pixels_per_mm = $("#flex").width()/85.60;
 
+                $("#flex").resizable({
+                    aspectRatio: 1011/638, 
+                    //Taken from original image size in pixels, = 1.5846394984
+                    //cc Aspect is 85.60/53.98 = 1.5857725083
+                    containment: "#creditCardBody",
+                    resize: function (event, ui) {
+
+                    pixels_per_mm = $("#flex").width()/85.60
+                    
+                    //console.log('Pixels per mm: '+pixels_per_mm)
+                    
+                    //pixels_per_inch = $("#flex").width()/3.370;
+                    //$("#ccSave").html('Save - ' + pixels_per_milimeter);
+                  }
+                });
+
+                $("#ccSave").click(function() {
+                    console.log('Pixels per mm: '+pixels_per_mm)
+                });
+
+                $('.zoombox_calibrate').prop('title', 'Calibrate your screen');
+                $('.zoombox_scale').prop('title', 'Toggle real sized view');
+                $('.zoombox_scale_toggled').prop('title', 'Toggle fit to screen');
+
+                $(function () {
+                  $('[data-toggle="tooltip"]').tooltip()
+                })
+
+            });
+        }
 
         $('body').append(html_scaler);
     } else {
@@ -395,6 +448,7 @@ function open(){
     if(options.animation == true){
         $('#zoombox .zoombox_title').hide();
         $('#zoombox .zoombox_scale').hide();
+        $('#zoombox .zoombox_scale_toggled').hide();
         $('#zoombox .zoombox_calibrate').hide();
         $('#zoombox .zoombox_close').hide();
         $('#zoombox .zoombox_container').animate(css,options.duration,function(){
@@ -406,6 +460,7 @@ function open(){
             }
             $('#zoombox .zoombox_title').fadeIn(300);
             $('#zoombox .zoombox_scale').fadeIn(300);
+            $('#zoombox .zoombox_scale_toggled').fadeIn(300);
             $('#zoombox .zoombox_calibrate').fadeIn(300);
             $('#zoombox .zoombox_close').fadeIn(300);
             state = 'opened';
@@ -418,6 +473,7 @@ function open(){
     }else{
         $('#zoombox .zoombox_content').append(content);
         $('#zoombox .zoombox_scale').show();
+        $('#zoombox .zoombox_scale_toggled').show();
         $('#zoombox .zoombox_calibrate').show();
         $('#zoombox .zoombox_close').show();
         $('#zoombox .zoombox_gallery').show();
@@ -494,10 +550,11 @@ function scale(){
 
     //Show calibration modal/dialog if not yet calibrated
     if (!pixels_per_mm) {
+        close();
         calibrate();
     } else {
         resizeScaled = true;
-        
+        $( "#scaleToggle" ).toggleClass(zoombox_scale, zoombox_scale_toggled);
         //fix so more intuitive.
         close();
     }
@@ -508,7 +565,8 @@ function scale(){
 * Calibration modals
 **/
 function calibrate(){
-    $('#calibrateModal').modal();
+    //$('#calibrateModal').modal();
+    creditCard();
 }
 
 function creditCard(){

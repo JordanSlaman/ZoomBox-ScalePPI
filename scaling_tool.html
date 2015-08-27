@@ -37,12 +37,12 @@
 		}
 
 		#box {
-			width:244px;
+			width:247px;
 			height:150px;
 			background: rgba(10, 255, 225, 0.2);
 			border: 1px black dashed;
 			z-index: 1;
-			top:230px;
+			top:75px;
 			left:292px;
 		}
 
@@ -115,7 +115,7 @@
 					<input type="checkbox" id="hideThumb" > Hide Thumbnail
 				</label>
 			</div>
-			<input type="text" style="display:none;" id="scaleFactor" value="289.3827160493827"></input>
+			<input type="text" style="display:none;" id="scaleFactor" value="262.6236734693877"></input>
 		</div>
 
 		<div class="row" style="padding-top:15px;">
@@ -184,7 +184,7 @@
 				hideThumb = " style=\"display:none;\"";
 			}
 
-			$('#output').html('&lt;li'+hideThumb+'&gt;<br>	&lt;a href="'+$("#imageURL").val()+'" title="'+$("#imageTitle").val()+'" class="zoombox '+$("#imageGallery").val()+'" data-description="'+$("#imageCaption").val()+'"&gt;<br>		&lt;img src="'+$("#imageURL").val()+'" data-scalefactor="'+$("#scaleFactor").val()+'" alt="'+$("#imageCaption").val()+'" /&gt;<br>	&lt;/a&gt;<br>&lt;/li&gt;');
+			$('#output').html('&lt;li'+hideThumb+'&gt;<br>&lt;a href="'+$("#imageURL").val()+'" title="'+$("#imageTitle").val()+'" class="zoombox '+$("#imageGallery").val()+'" data-scalefactor="'+$("#scaleFactor").val()+'" data-description="'+$("#imageCaption").val()+'"&gt;<br>&lt;img src="'+$("#imageURL").val()+'" alt="'+$("#imageCaption").val()+'" /&gt;<br>&lt;/a&gt;<br>&lt;/li&gt;');
 		}
 
 		$('#load').click(updateURL);
@@ -193,6 +193,7 @@
 		$('#imageTitle').change(updateText);
 		$('#imageCaption').change(updateText);
 		$('#hideThumb').change(updateText);
+		$("#innerWidth").change(updateText);
 
 	</script>
 

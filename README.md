@@ -9,21 +9,22 @@ This repository is hosted live at http://scaler.jordanslaman.com/
 Soft fail for mobile.
 
 Calibration modals
-	Credit Card Modal returns an actual PPI value that zoombox can use - insert into dom?
-	Javascript detection in main modal, and autocompute PPI when Manually entered.
+	Javascript detection in main modal, and autocompute PPI when Manually entered. - temporarily shelved.
 
 
 Scaling
-	uses ppmm and scalefactor values instead of hardcoded.
-	fix window pos, animation
-	buttons toggle.
+	fix window positioning, animation
+	buttons toggle, immediate rescale effect.
 
 Styling
-	visual cues about 
+	visual cues about toggle status
 
 Scaling tool
 	Test Button, insert gallery into dom
 
 ---
 
-24.5
+25.5
+
+
+13:30 - 
