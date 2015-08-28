@@ -37,6 +37,7 @@ var state = 'closed';
 var pixels_per_mm;
 var scalefactor;
 var resizeScaled = false;
+var firstRun = true;
 
 
 /**
@@ -66,7 +67,7 @@ var html_scaler = '<div id="zoombox"> \
                     <div class="zoombox_next"></div>\
                     <div class="zoombox_prev"></div>\
                     <div class="zoombox_calibrate" data-toggle="tooltip" data-placement="bottom" title="Calibrate your screen"></div>\
-                    <div id="scaleToggle" class="zoombox_scale" data-toggle="tooltip" data-placement="bottom" title="Toggle real sized view"></div>\
+                    <div id="scaleToggle" data-toggle="tooltip" data-placement="bottom" title="Toggle real sized view"></div>\
                     <div class="zoombox_close"></div>\
                 </div>\
                 <div class="zoombox_gallery"></div>\
@@ -201,7 +202,7 @@ function build(){
 
                 $('.zoombox_calibrate').prop('title', 'Calibrer votre écran');
                 $('.zoombox_scale').prop('title', 'Activer la vue grandeur réelle');
-                $('.zoombox_scale_toggled').prop('title', 'Activer la vue grandeur réelle'); //NEED FRENCH TEXT
+                $('.zoombox_scale_toggled').prop('title', 'Désactiver la grandeur réelle'); //NEED FRENCH TEXT
 
                 $(function () {
                   $('[data-toggle="tooltip"]').tooltip()
@@ -260,7 +261,7 @@ function build(){
     // We add a specific class to define the box theme
     $('#zoombox').addClass(options.theme);
     //Scale button behaviour
-    $('#zoombox .zoombox_scale').click(function(){
+    $('#zoombox #scaleToggle').click(function(){
         scale();
         return false;
     });
@@ -438,6 +439,10 @@ function open(){
             marginTop : scrollY(),
             opacity:1
         };
+
+        $( "#scaleToggle" ).addClass( "zoombox_scale_toggled" );
+    } else {
+        $( "#scaleToggle" ).addClass( "zoombox_scale" );
     }
 
 
@@ -546,17 +551,21 @@ function close(){
  * Scale button
  * **/
 function scale(){
-    //build toggle, toggle effect
 
     //Show calibration modal/dialog if not yet calibrated
     if (!pixels_per_mm) {
         close();
         calibrate();
+    } else if (resizeScaled) {
+        resizeScaled = false;
+        close();
+        $.zoombox.open(link,options);
+        console.log("Toggled Scaling Off!");
     } else {
         resizeScaled = true;
-        $( "#scaleToggle" ).toggleClass("zoombox_scale", "zoombox_scale_toggled");
         close();
-        //Relaunch
+        $.zoombox.open(link,options);
+        console.log("Toggled Scaling On!");
     }
 
 }
@@ -565,7 +574,7 @@ function scale(){
 * Calibration modals
 **/
 function calibrate(){
-    //$('#calibrateModal').modal();
+    close(); //Reopen?
     creditCard();
 }
 
