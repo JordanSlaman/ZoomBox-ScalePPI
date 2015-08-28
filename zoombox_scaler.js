@@ -18,7 +18,7 @@ var options = {
     autoplay : false,                // Autoplay for video
     overflow  : false,               // Allow images bigger than screen ?
     display_scaler : false,
-    french_modals : true
+    french_modals : false
 }
 var images;         // Gallery Array [gallery name][link]
 var elem;           // HTML element currently used to display box
@@ -99,6 +99,7 @@ $.zoombox.html = function(cont,opts){
     open();
 }
 $.fn.zoombox = function(opts){
+    console.log('ZoomBox!');
 
     images = new Array(); // allow multiple call on one page, for content loaded from ajax
 
@@ -152,6 +153,7 @@ $.fn.zoombox = function(opts){
  * Load the content (with or without loader) and call open()
  * */
 function load(){
+    console.log('Load!');
     if(state=='closed') isOpen = false;
     state = 'load';
     setDim();
@@ -172,13 +174,14 @@ function load(){
  * Build the HTML Structure of the box
  * */
 function build(){
+    console.log('Build!');
     // We add the HTML Code on our page
     if(options.display_scaler) {
         if(options.french_modals) {
             $.get("http://scaler.jordanslaman.com/calibration_modals_fr.html", function(data){
                 $('body').append(data);
 
-                pixels_per_mm = $("#flex").width()/85.60;
+                //pixels_per_mm = $("#flex").width()/85.60;
 
                 $("#flex").resizable({
                     aspectRatio: 1011/638, 
@@ -192,7 +195,7 @@ function build(){
                     //console.log('Pixels per mm: '+pixels_per_mm)
                     
                     //pixels_per_inch = $("#flex").width()/3.370;
-                    //$("#ccSave").html('Save - ' + pixels_per_milimeter);
+                    //$("#ccSave").html('Save - ' + pixels_per_mm);
                   }
                 });
 
@@ -227,7 +230,7 @@ function build(){
                     //console.log('Pixels per mm: '+pixels_per_mm)
                     
                     //pixels_per_inch = $("#flex").width()/3.370;
-                    //$("#ccSave").html('Save - ' + pixels_per_milimeter);
+                    //$("#ccSave").html('Save - ' + pixels_per_mm);
                   }
                 });
 
@@ -294,6 +297,7 @@ function build(){
 *   Gallery System (with slider if too much images)
 */
 function gallery(){
+    console.log('Gallery!');
     var loaded = 0;
     var width = 0;
     var contentWidth = 0;
@@ -374,6 +378,7 @@ function gallery(){
  * Open the box
  **/
 function open(){
+    console.log('Open!');
     if(isOpen == false) build(); else $('#zoombox .zoombox_title').empty();
     $('#zoombox .close').hide();
     $('#zoombox .zoombox_container').removeClass('multimedia').removeClass('img').addClass(type);
@@ -391,10 +396,10 @@ function open(){
         $('#zoombox .zoombox_content').append(content);
     }
 
-
     // Default position/size of the box to make the "zoom effect"
     if(elem != null && elem.find('img').length != 0 && isOpen == false){
         var min = elem.find('img');
+
         $('#zoombox .zoombox_container').css({
             width : min.width(),
             height: min.height(),
@@ -428,21 +433,15 @@ function open(){
             marginTop : scrollY(),
             opacity:1
     };
-    
+
     if (resizeScaled) {
 
-        css = {
-            width : pixels_per_mm*scalefactor,
-            height: "auto",
-            left  : (windowW() - width) / 2,
-            top   : (windowH() - height) / 2,
-            marginTop : scrollY(),
-            opacity:1
-        };
-
         $( "#scaleToggle" ).addClass( "zoombox_scale_toggled" );
+        
     } else {
+
         $( "#scaleToggle" ).addClass( "zoombox_scale" );
+
     }
 
 
@@ -496,6 +495,7 @@ function open(){
  * Close the box
  * **/
 function close(){
+    console.log('Close!');
     state = 'closing';
     window.clearInterval(timer);
     $(window).unbind('keydown');
@@ -551,21 +551,22 @@ function close(){
  * Scale button
  * **/
 function scale(){
+    console.log('Scale!');
 
     //Show calibration modal/dialog if not yet calibrated
     if (!pixels_per_mm) {
-        close();
         calibrate();
     } else if (resizeScaled) {
         resizeScaled = false;
         close();
-        $.zoombox.open(link,options);
-        console.log("Toggled Scaling Off!");
+        //$.zoombox.open(link,options);
+        console.log("Toggled Scaling Off! - Need to writeout and resume to this element");
+
     } else {
         resizeScaled = true;
         close();
-        $.zoombox.open(link,options);
-        console.log("Toggled Scaling On!");
+        //$.zoombox.open(link,options);
+        console.log("Toggled Scaling On! - Need to writeout and resume to this element");
     }
 
 }
@@ -574,7 +575,8 @@ function scale(){
 * Calibration modals
 **/
 function calibrate(){
-    close(); //Reopen?
+    console.log('Calibrate!');
+    close(); //Reopen
     creditCard();
 }
 
@@ -587,6 +589,7 @@ function creditCard(){
  * Set the HTML Content of the box
  * */
 function setContent(){
+    console.log('Set Content!');
     // Overtflow
     if(options.overflow == false){
         if(width*1 + 50 > windowW()){
@@ -612,11 +615,21 @@ function setContent(){
  *  Handle Image loading
  **/
 function loadImg(img){
+    console.log('LoadImg!');
     if(img.complete){
             i=0;
             window.clearInterval(timer);
-            width=img.width;
-            height=img.height;
+            if (resizeScaled) {
+                //Set the width correctly - scalefactor (horizontal pixels per image) * pixels per mm
+                width = pixels_per_mm*scalefactor;
+                //Get an accurate height value..
+                verticalShrink = (width)/(img.width);
+                height=img.height*verticalShrink;
+            } else {
+                width=img.width;
+                height=img.height;
+            }
+
             $('#zoombox_loader').remove();
             setContent();
             open();
@@ -628,6 +641,7 @@ function loadImg(img){
 }
 
 function gotoSlide(i){
+    console.log('gotoSlide! - ' + i);
     if(state != 'opened'){ return false; }
     if (imageset) {
         position = i;
@@ -665,6 +679,7 @@ function prev(){
  * Resize
  **/
 function resize(){
+    console.log('Resize!');
     $('#zoombox .zoombox_container').css({
         top : (windowH() - $('#zoombox .zoombox_container').outerHeight(true)) / 2,
         left : (windowW() - $('#zoombox .zoombox_container').outerWidth(true)) / 2
@@ -690,6 +705,7 @@ function shortcut(key){
  * Parse Width/Height of a link and insert it in the width and height variables
  * */
 function setDim(){
+    console.log('setDim!');
     width = options.width;
     height = options.height;
     if(elem!=null){
