@@ -195,6 +195,82 @@
 		$('#hideThumb').change(updateText);
 		$("#innerWidth").change(updateText);
 
+		//Keyboard Support
+
+		$(document).keydown(function(e) {
+		    switch(e.which) {
+		        case 37: // left
+			        if (!e.shiftKey) {
+			        	if (!e.altKey){
+			        		$("#box").css('left', '-=1px');
+			        	} else {
+			        		$("#box").css('width', '-=1px');
+			        	}
+	        		} else {
+	        			if (!e.altKey){
+			        		$("#box").css('left', '-=10px');
+			        	} else {
+			        		$("#box").css('width', '-=10px');
+			        	}
+	        		}
+		        break;
+
+		        case 38: // up
+		        	if (!e.shiftKey) {
+			        	if (!e.altKey){
+			        		$("#box").css('top', '-=1px');
+			        	} else {
+			        		$("#box").css('height', '-=1px');
+			        	}
+	        		} else {
+			        	if (!e.altKey){
+			        		$("#box").css('top', '-=10px');
+			        	} else {
+			        		$("#box").css('height', '-=10px');
+			        	}
+	        		}
+		        	
+		        break;
+
+		        case 39: // right
+		        	if (!e.shiftKey) {
+			        	if (!e.altKey){
+			        		$("#box").css('left', '+=1px');
+			        	} else {
+			        		$("#box").css('width', '+=1px');
+			        	}
+	        		} else {
+			        	if (!e.altKey){
+			        		$("#box").css('left', '+=10px');
+			        	} else {
+			        		$("#box").css('width', '+=10px');
+			        	}
+	        		}
+		        	
+		        break;
+
+		        case 40: // down
+		        	if (!e.shiftKey) {
+			        	if (!e.altKey){
+			        		$("#box").css('top', '+=1px');
+			        	} else {
+			        		$("#box").css('height', '+=1px');
+			        	}
+	        		} else {
+			        	if (!e.altKey){
+			        		$("#box").css('top', '+=10px');
+			        	} else {
+			        		$("#box").css('height', '+=10px');
+			        	}
+	        		}
+		        	
+		        break;
+
+		        default: return; // exit this handler for other keys
+		    }
+		    e.preventDefault(); // prevent the default action (scroll / move caret)
+		});
+
 	</script>
 
 

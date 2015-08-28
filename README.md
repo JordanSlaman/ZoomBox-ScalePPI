@@ -11,17 +11,15 @@ Soft fail for mobile.
 Calibration modals
 	Javascript detection in main modal, and autocompute PPI when Manually entered. - temporarily shelved.
 
-
-Scaling
-	fix window positioning, animation
-	buttons toggle, immediate rescale effect.
-
-Styling
-	visual cues about toggle status
-
 Scaling tool
 	Test Button, insert gallery into dom
+	Configure & Assemble multiple images and galleries. 
+	Keyboard support for fine tuning.
 
 ---
 
-30.5
+35.5
+
+30.5+ 10:20-15:20
+
+15:30-
