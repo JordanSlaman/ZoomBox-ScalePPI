@@ -35,9 +35,9 @@ var imageset = false;
 var state = 'closed';
 
 var pixels_per_mm;
+var calibrated = false;
 var scalefactor;
 var resizeScaled = false;
-var firstRun = true;
 
 
 /**
@@ -142,6 +142,8 @@ $.fn.zoombox = function(opts){
             position = pos;
 
             scalefactor = $(elem).data("scalefactor");
+            console.log('Set scalefactor - '+scalefactor);
+
 
             load();
             return false;
@@ -153,7 +155,8 @@ $.fn.zoombox = function(opts){
  * Load the content (with or without loader) and call open()
  * */
 function load(){
-    console.log('Load!');
+    console.log('Load!'+link);
+
     if(state=='closed') isOpen = false;
     state = 'load';
     setDim();
@@ -551,12 +554,13 @@ function close(){
  * Scale button
  * **/
 function scale(){
-    console.log('Scale!');
+    console.log('Scale! - pppm: '+pixels_per_mm);
 
     //Show calibration modal/dialog if not yet calibrated
-    if (!pixels_per_mm) {
+    if (!calibrated) {
         calibrate();
-    } else if (resizeScaled) {
+    }
+    if (resizeScaled) {
         resizeScaled = false;
         close();
         //$.zoombox.open(link,options);
@@ -576,8 +580,9 @@ function scale(){
 **/
 function calibrate(){
     console.log('Calibrate!');
-    close(); //Reopen
+    close();
     creditCard();
+    calibrated = true;
 }
 
 function creditCard(){
@@ -616,6 +621,7 @@ function setContent(){
  **/
 function loadImg(img){
     console.log('LoadImg!');
+
     if(img.complete){
             i=0;
             window.clearInterval(timer);
@@ -629,6 +635,7 @@ function loadImg(img){
                 width=img.width;
                 height=img.height;
             }
+            console.log('Scaling On = '+resizeScaled+', width = '+width+', height = '+height);
 
             $('#zoombox_loader').remove();
             setContent();
@@ -651,6 +658,8 @@ function gotoSlide(i){
             $('#zoombox .zoombox_gallery img').removeClass('current');
             $('#zoombox .zoombox_gallery img:eq('+i+')').addClass('current');
         }
+        scalefactor = $(elem).data("scalefactor");
+        console.log('Set scalefactor - '+scalefactor);
         load();
     }
     return false;
@@ -705,7 +714,7 @@ function shortcut(key){
  * Parse Width/Height of a link and insert it in the width and height variables
  * */
 function setDim(){
-    console.log('setDim!');
+    //console.log('setDim!');
     width = options.width;
     height = options.height;
     if(elem!=null){
@@ -724,6 +733,7 @@ function setDim(){
             }
         }
     }
+    //console.log(width + 'x' + height);
     return false;
 }
 /**
