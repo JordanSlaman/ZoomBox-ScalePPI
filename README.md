@@ -14,12 +14,19 @@ Calibration modals
 Scaling tool
 	Test Button, insert gallery into dom
 	Configure & Assemble multiple images and galleries. 
-	Keyboard support for fine tuning.
+
+General
+	Save PpMM over sessions
+	'detect' no javascript
 
 ---
 
-35.5
+40 Paid
 
-30.5+ 10:20-15:20
+1
 
-15:30-
+--
+
+Shorcut to the test page:
+http://opboptique.com/clip-ons-2-1/?lang=en
+That's what's needed for the presentation. Then after that we'll also have to make corrections to the scaling tool cause the resizing of the box using the arrows does'nt change the scale factor. And we'll have to make the scaling tool more cute like we discussed.
